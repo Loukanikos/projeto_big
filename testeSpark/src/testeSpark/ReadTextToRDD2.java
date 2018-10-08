@@ -53,10 +53,10 @@ public class ReadTextToRDD2 {
         		    public Acao call(String line) throws Exception {
         		      String[] parts = line.split("\\t");
         		      Acao acao = new Acao();
-        		      acao.setDataPregao(LocalDate.of(
-        		    		  Integer.parseInt(parts[0].substring(2,6))
-        		    		  , Integer.parseInt(parts[0].substring(6,8))
-        		    		  , Integer.parseInt(parts[0].substring(8,10))));
+        		      //acao.setDataPregao(LocalDate.of(
+        		    	//	  Integer.parseInt(parts[0].substring(2,6))
+        		    	//	  , Integer.parseInt(parts[0].substring(6,8))
+        		    	//	  , Integer.parseInt(parts[0].substring(8,10))));
         		      acao.setCodigoBDI(parts[0].substring(10,12));
         		      acao.setCodigoNeg(parts[0].substring(12,24));
         		      acao.setTipoMercado(parts[0].substring(24,27));

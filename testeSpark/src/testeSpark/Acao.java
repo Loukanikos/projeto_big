@@ -10,7 +10,8 @@ public class Acao implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 8748585889974697303L;
-	private LocalDate dataPregao;
+	//private LocalDate dataPregao;
+	private String dataPregao;
 	private String codigoBDI;
 	private String codigoNeg;
 	private String tipoMercado;
@@ -38,10 +39,10 @@ public class Acao implements Serializable{
 	public Acao(String string, String string2) {
 		super();
 	}
-	public LocalDate getDataPregao() {
+	public String getDataPregao() {
 		return dataPregao;
 	}
-	public void setDataPregao(LocalDate dataPregao) {
+	public void setDataPregao(String dataPregao) {
 		this.dataPregao = dataPregao;
 	}
 	public String getCodigoBDI() {
