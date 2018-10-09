@@ -15,7 +15,11 @@ import org.apache.spark.sql.SparkSession;
 public class TrabalhoEngSoft33 {
 
 	public static void main(String[] args) {
-        //definindo o contexto local do eclipse
+        
+		// Somente Windows: Erro com o winutils.exe
+		System.setProperty("hadoop.home.dir", "C:\\Projetos\\Apache\\spark-2.3.2-bin-hadoop2.7");
+		
+		//definindo o contexto local do eclipse
 		SparkConf sparkConf = new SparkConf()
         		.setAppName("testeSpark")
                 .setMaster("local");
@@ -27,7 +31,12 @@ public class TrabalhoEngSoft33 {
         		.getOrCreate();
         
         // criando o path do arquivo
-        String path = "../../../../root/Downloads/COTAHIST_A2017.TXT";
+//        String path = "../../../../root/Downloads/COTAHIST_A2017.TXT";
+        String path = "C:\\Projetos\\UFRJ\\dataset\\COTAHIST_A2017.TXT";
+//        System.out.println("Present Project Directory : "+ System.getProperty("user.dir"));
+//        System.out.println(System.getProperty("os.name"));
+//        System.getProperties().list(System.out);
+        
         //abrindo o DRR e mapeando para a classe
         JavaRDD<Acao> acaoRDD = spark.read().textFile(path).filter(s -> s.substring(0,2).contains("01"))
         		.toJavaRDD()
@@ -42,6 +51,7 @@ public class TrabalhoEngSoft33 {
         		    public Acao call(String line) throws Exception {
         		      String[] parts = line.split("\\t");
         		      Acao acao = new Acao();
+        		      // TODO Ajustar Data Pregao
         		      //acao.setDataPregao(LocalDate.of(Integer.parseInt(parts[0].substring(2,6)), Integer.parseInt(parts[0].substring(6,8)), Integer.parseInt(parts[0].substring(8,10))));
         		      acao.setDataPregao(parts[0].substring(2,10));
         		      acao.setCodigoBDI(parts[0].substring(10,12));
@@ -61,10 +71,17 @@ public class TrabalhoEngSoft33 {
         		      
         		      return acao;
         		    }
-        		  }); 
+        		  });
+        
         //convertendo para dataset
         Dataset<Row> acaoDF = spark.createDataFrame(acaoRDD, Acao.class);
         acaoDF.show();
+        
+        System.out.println("\n\n=========================================\n\n");
+        
+        // Aplicando machine learning
+        RegressaoLinear lr = new RegressaoLinear();
+        lr.aplicar(acaoDF);
         
 	}
 
