@@ -1,6 +1,7 @@
 package testeSpark;
 
-import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.SparkContext;
@@ -12,6 +13,7 @@ import org.apache.spark.sql.Encoders;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 
+import scala.Tuple2;
 public class TrabalhoEngSoft33 {
 
 	public static void main(String[] args) {
@@ -64,8 +66,24 @@ public class TrabalhoEngSoft33 {
         		  }); 
         //convertendo para dataset
         Dataset<Row> acaoDF = spark.createDataFrame(acaoRDD, Acao.class);
-        acaoDF.show();
+        //acaoDF.show();
+        //acaoDF.printSchema();
+        //selecionando duas colunas
+        Dataset<Row> selectAcaoDF = acaoDF.selectExpr("precoAbertura","precoAbertura");
+        selectAcaoDF.show();
         
+        List<Double> listOne = selectAcaoDF.as(Encoders.DOUBLE()).collectAsList();
+        System.out.println(listOne.size());
+        
+        Encoder<Acao> encoder =  Encoders.bean(Acao.class);
+        
+        
+        System.out.println(listOne.size());
+ 
+
+
+        
+
 	}
 
 }
