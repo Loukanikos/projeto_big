@@ -20,7 +20,7 @@ public class TrabalhoEngSoft33 {
 	public static void main(String[] args) {
 
 		// Somente Windows: Erro com o winutils.exe
-		System.setProperty("hadoop.home.dir", "C:\\Projetos\\Apache\\spark-2.3.2-bin-hadoop2.7");
+		//System.setProperty("hadoop.home.dir", "C:\\Projetos\\Apache\\spark-2.3.2-bin-hadoop2.7");
 
 		// definindo o contexto local do eclipse
 		SparkConf sparkConf = new SparkConf().setAppName("testeSpark").setMaster("local");
