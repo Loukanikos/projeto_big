@@ -11,12 +11,12 @@ import org.apache.spark.sql.Row;
 
 public class RegressaoLinear {
 	
-	public void aplicar(Dataset<Row> dados) {
+	public void aplicar(Dataset<Row> dados, String[] colunas, String rotulo) {
 		// Load training data.
 /*		Dataset<Row> training = spark.read().format("libsvm")
 		  .load("data/mllib/sample_linear_regression_data.txt");*/
 		
-		String[] colunas = {"precoAbertura","precoMaximo","precoMelhorOfertaCompra","precoMelhorOfertaVenda","precoMinimo","precoUltimoNegoc"};
+		//String[] colunas = {"precoAbertura","precoMaximo","precoMelhorOfertaCompra","precoMelhorOfertaVenda","precoMinimo","precoUltimoNegoc"};
 
 		VectorAssembler assembler = new VectorAssembler().setInputCols(colunas).setOutputCol("features");
 		
@@ -27,7 +27,7 @@ public class RegressaoLinear {
 		  .setRegParam(0.3)
 		  .setElasticNetParam(0.8)
 		  .setFeaturesCol("features")
-		  .setLabelCol("precoAbertura");
+		  .setLabelCol(rotulo);
 
 		// Fit the model.
 		LinearRegressionModel lrModel = lr.fit(features);
