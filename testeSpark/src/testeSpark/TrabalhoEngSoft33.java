@@ -31,11 +31,8 @@ public class TrabalhoEngSoft33 {
         		.getOrCreate();
         
         // criando o path do arquivo
-//        String path = "../../../../root/Downloads/COTAHIST_A2017.TXT";
-        String path = "C:\\Projetos\\UFRJ\\dataset\\COTAHIST_A2017.TXT";
-//        System.out.println("Present Project Directory : "+ System.getProperty("user.dir"));
-//        System.out.println(System.getProperty("os.name"));
-//        System.getProperties().list(System.out);
+        String path = "../../../../root/Downloads/COTAHIST_A2017.TXT";
+        // String path = "C:\\Projetos\\UFRJ\\dataset\\COTAHIST_A2017.TXT"; // Vinicius
         
         //abrindo o DRR e mapeando para a classe
         JavaRDD<Acao> acaoRDD = spark.read().textFile(path).filter(s -> s.substring(0,2).contains("01"))
