@@ -19,7 +19,7 @@ public class TrabalhoEngSoft33 {
 
 	public static void main(String[] args) {
 
-		// Somente Windows: Erro com o winutils.exe
+		// Somente Windows: Erro com o winutils.exe 
 		//System.setProperty("hadoop.home.dir", "C:\\Projetos\\Apache\\spark-2.3.2-bin-hadoop2.7");
 
 		// definindo o contexto local do eclipse
@@ -31,7 +31,7 @@ public class TrabalhoEngSoft33 {
 
 		// criando o path do arquivo
 		String path = "../../../../root/Downloads/COTAHIST_A2017.TXT";
-		// String path = "C:\\Projetos\\UFRJ\\dataset\\COTAHIST_A2017.TXT"; // Vinicius
+		//String path = "C:\\Projetos\\UFRJ\\dataset\\COTAHIST_A2017.TXT"; // Vinicius
 
 		// abrindo o DRR e mapeando para a classe
 		JavaRDD<Acao> acaoRDD = spark.read().textFile(path).filter(s -> s.substring(0, 2).contains("01")).toJavaRDD()
@@ -74,16 +74,18 @@ public class TrabalhoEngSoft33 {
 		// selecionando duas colunas
 		Dataset<Row> selectAcaoDF = acaoDF.selectExpr("precoAbertura", "precoAbertura");
 		selectAcaoDF.show();
-
+		
+/*		Erro na linha abaixo. org.apache.spark.sql.AnalysisException
 		List<Double> listOne = selectAcaoDF.as(Encoders.DOUBLE()).collectAsList();
 		System.out.println(listOne.size());
 
 		Encoder<Acao> encoder = Encoders.bean(Acao.class);
 
-		System.out.println(listOne.size());
+		System.out.println(listOne.size());*/
+		
 		
 		System.out.println("\n\n\n========================================================\n\n\n");
-        
+		
         // Aplicando machine learning
 		String[] colunas = {"precoAbertura","precoMaximo","precoMelhorOfertaCompra","precoMelhorOfertaVenda","precoMinimo","precoUltimoNegoc"};
 		String rotulo = "precoAbertura";
