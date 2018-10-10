@@ -69,11 +69,16 @@ public class TrabalhoEngSoft33 {
 				});
 		// convertendo para dataset
 		Dataset<Row> acaoDF = spark.createDataFrame(acaoRDD, Acao.class);
-		// acaoDF.show();
+		//acaoDF.show(10000);
 		// acaoDF.printSchema();
 		// selecionando duas colunas
 		Dataset<Row> selectAcaoDF = acaoDF.selectExpr("precoAbertura", "precoAbertura");
 		selectAcaoDF.show();
+		acaoDF.write()
+		.format("com.databricks.spark.csv")
+		.option("header", true)
+		//.option("codec", "org.apache.hadoop.io.compress.GzipCodec")
+		.save("../../../../root/Downloads/teste.csv");
 		
 /*		Erro na linha abaixo. org.apache.spark.sql.AnalysisException
 		List<Double> listOne = selectAcaoDF.as(Encoders.DOUBLE()).collectAsList();
