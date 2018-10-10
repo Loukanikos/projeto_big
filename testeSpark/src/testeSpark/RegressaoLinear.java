@@ -1,10 +1,17 @@
 package testeSpark;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import org.apache.spark.ml.feature.VectorAssembler;
+import org.apache.spark.ml.linalg.Vectors;
 import org.apache.spark.ml.regression.LinearRegression;
 import org.apache.spark.ml.regression.LinearRegressionModel;
 import org.apache.spark.ml.regression.LinearRegressionTrainingSummary;
-import org.apache.spark.ml.feature.VectorAssembler;
-import org.apache.spark.ml.linalg.Vectors;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 //import org.apache.spark.sql.SparkSession;
@@ -42,6 +49,20 @@ public class RegressaoLinear {
 		trainingSummary.residuals().show();
 		System.out.println("RMSE: " + trainingSummary.rootMeanSquaredError());
 		System.out.println("r2: " + trainingSummary.r2());
+		try {
+			FileWriter file = new FileWriter("../../../../root/Downloads/acao/file.csv");
+			PrintWriter print = new PrintWriter(file);
+			print.print(trainingSummary.rootMeanSquaredError());
+			print.print(";");
+			print.print(trainingSummary.r2());
+			print.close();
+			
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

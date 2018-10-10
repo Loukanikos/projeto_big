@@ -78,7 +78,7 @@ public class TrabalhoEngSoft33 {
 		.format("com.databricks.spark.csv")
 		.option("header", true)
 		//.option("codec", "org.apache.hadoop.io.compress.GzipCodec")
-		.save("../../../../root/Downloads/teste.csv");
+		.save("../../../../root/Downloads/acao");
 		
 /*		Erro na linha abaixo. org.apache.spark.sql.AnalysisException
 		List<Double> listOne = selectAcaoDF.as(Encoders.DOUBLE()).collectAsList();
